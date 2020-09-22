@@ -39,8 +39,8 @@ public class ContactService {
        return contactRepository.findAll();
     }
 
-    public int updateContact(){
-        return 0;
+    public int updateContact(Contact contact){
+        return contactRepository.updateContact(contact);
     }
 
 }

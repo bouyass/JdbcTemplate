@@ -82,13 +82,23 @@ public class ContactRepository {
          List<Contact> listContacts = jdbcTemplate.query(Queries.SQL_FIND_ALL, BeanPropertyRowMapper.newInstance(Contact.class));
          return listContacts;
     }
-   /* private RowMapper<Contact> userRowMapper = ((rs, rowNum) -> {
-        return new Contact(rs.getInt("USER_ID"),
-                rs.getString("FIRST_NAME"),
-                rs.getString("LAST_NAME"),
-                rs.getString("EMAIL"),
-                rs.getString("PASSWORD"));
-    });*/
 
+    public int updateContact(Contact contact){
+        try{
+            jdbcTemplate.update(connection -> {
+                PreparedStatement ps = connection.prepareStatement(Queries.SQL_UPDATE_CONTACT, Statement.RETURN_GENERATED_KEYS);
+                ps.setString(1,contact.getName());
+                ps.setString(2,contact.getEmail());
+                ps.setString(3,contact.getAddress());
+                ps.setString(4,contact.getPhone());
+                ps.setString(5,contact.getEmail());
+                return ps;
+            });
+            return 1;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return 0;
+    }
 
 }

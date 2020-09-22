@@ -7,4 +7,5 @@ public class Queries {
     public static final String SQL_FIND_ALL = "SELECT CONTACT_ID, CONTACT_NAME, EMAIL, ADDRESS, TELEPHONE FROM CONTACT";
     public static final String SQL_DELETE_BY_ID = "DELETE FROM CONTACT WHERE CONTACT_ID = ?";
     public static final String SQL_DELETE_BY_EMAIL = "DELETE FROM CONTACT WHERE EMAIL = ?";
+    public static final String SQL_UPDATE_CONTACT = "UPDATE CONTACT SET CONTACT_NAME = ?, EMAIL = ?, ADDRESS = ?, TELEPHONE = ? WHERE EMAIL = ?";
 }

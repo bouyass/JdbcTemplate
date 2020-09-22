@@ -110,4 +110,23 @@ public class ContactController {
             return new ResponseEntity<>(map, HttpStatus.OK);
         }
     }
+
+    @PostMapping("/updateContact")
+    public ResponseEntity<Map<String, String>> updateContact(@RequestBody Map<String, String> contactMap){
+        String name = (String) contactMap.get("name");
+        String email = (String) contactMap.get("email");
+        String address = (String) contactMap.get("address");
+        String telephone = (String) contactMap.get("telephone");
+        Contact contact = new Contact(name, email, address, telephone);
+        int result = contactService.updateContact(contact);
+        if(result == 1){
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","contact has been updated");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }else{
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","operation failed");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+    }
 }
