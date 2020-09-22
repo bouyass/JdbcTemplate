@@ -1,0 +1,10 @@
+package com.example.demo;
+
+public class Queries {
+    public static final String SQL_ADD_CONTACT = "INSERT INTO CONTACT (CONTACT_ID, CONTACT_NAME, EMAIL, ADDRESS, TELEPHONE ) VALUES (NEXTVAL('contact_seq'), ? , ? , ? , ? )";
+    public static final String SQL_FIND_BY_ID = "SELECT CONTACT_ID, CONTACT_NAME, EMAIL, ADDRESS, TELEPHONE FROM CONTACT WHERE CONTACT_ID = ?";
+    public static final String SQL_FIND_BY_EMAIL = "SELECT CONTACT_ID, CONTACT_NAME, EMAIL, ADDRESS, TELEPHONE FROM CONTACT WHERE EMAIL = ?";
+    public static final String SQL_FIND_ALL = "SELECT CONTACT_ID, CONTACT_NAME, EMAIL, ADDRESS, TELEPHONE FROM CONTACT";
+    public static final String SQL_DELETE_BY_ID = "DELETE FROM CONTACT WHERE CONTACT_ID = ?";
+    public static final String SQL_DELETE_BY_EMAIL = "DELETE FROM CONTACT WHERE EMAIL = ?";
+}

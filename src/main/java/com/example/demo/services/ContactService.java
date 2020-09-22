@@ -1,16 +1,22 @@
 package com.example.demo.services;
 
+import com.example.demo.dao.ContactRepository;
+import com.example.demo.model.Contact;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ContactService {
 
-    public int addContact(){
-        return 0;
+    @Autowired
+    ContactRepository contactRepository;
+
+    public int addContact(Contact contact){
+      return contactRepository.addContact(contact);
     }
 
-    public int removeContact(){
-        return  0;
+    public int removeContact(int contact_id){
+        return contactRepository.removeContact(contact_id);
     }
 
     public int updateContact(){
