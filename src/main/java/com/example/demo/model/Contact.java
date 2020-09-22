@@ -1,24 +1,28 @@
 package com.example.demo.model;
 
 public class Contact {
-    private String name;
+    private String contact_name;
     private String email;
     private String address;
-    private String phone;
+    private String telephone;
 
     public Contact(String name, String email, String address, String phone) {
-        this.name = name;
+        this.contact_name = name;
         this.email = email;
         this.address = address;
-        this.phone = phone;
+        this.telephone = phone;
+    }
+
+    public Contact() {
+        super();
     }
 
     public String getName() {
-        return name;
+        return contact_name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.contact_name = name;
     }
 
     public String getEmail() {
@@ -38,14 +42,14 @@ public class Contact {
     }
 
     public String getPhone() {
-        return phone;
+        return telephone;
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.telephone = phone;
     }
 
     public String toString() {
-        return String.format("[%s - %s - %s - %s]", name, email, address, phone);
+        return String.format("[%s - %s - %s - %s]", contact_name, email, address, telephone);
     }
 }

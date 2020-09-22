@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -36,12 +37,72 @@ public class ContactController {
         }
     }
 
-    @GetMapping("/removeContact/{contact_id}")
-    public ResponseEntity<Map<String, String>> removeContact(@PathVariable int contact_id){
-        int result = contactService.removeContact(contact_id);
+    @GetMapping("/removeContactById/{contact_id}")
+    public ResponseEntity<Map<String, String>> removeContactById(@PathVariable int contact_id){
+        int result = contactService.removeContactById(contact_id);
         if(result == 1){
             Map<String, String> map = new HashMap<String, String>();
             map.put("message","contact has been removed");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }else{
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","operation failed");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/removeContactByEmail")
+    public ResponseEntity<Map<String, String>> removeContactByEmail(@RequestBody String email){
+        int result = contactService.removeContactByEmail(email);
+        if(result == 1){
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","contact has been removed");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }else{
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","operation failed");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/findAll")
+    public ResponseEntity<Map<String, String>> findByAll(){
+        List<Contact> contacts =  contactService.findAll();
+        if(contacts.size() > 0){
+            Map<String, String> map = new HashMap<String, String>();
+            int i = 1;
+            for (Contact contact : contacts){
+                map.put("contact"+i,contact.toString());
+                i++;
+            }
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }else{
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","Il n'y aucun contact");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+    }
+
+    @GetMapping("/findById/{contact_id}")
+    public ResponseEntity<Map<String, String>> findById(@PathVariable int contact_id){
+        Contact contact =  contactService.findById(contact_id);
+        if(contact != null){
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message",contact.toString());
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }else{
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message","operation failed");
+            return new ResponseEntity<>(map, HttpStatus.OK);
+        }
+    }
+
+    @PostMapping("/findByEmail")
+    public ResponseEntity<Map<String, String>> findByEmail(@RequestBody Map<String, String> email){
+        Contact contact =  contactService.findByEmail(email.get("email"));
+        if(contact != null){
+            Map<String, String> map = new HashMap<String, String>();
+            map.put("message",contact.toString());
             return new ResponseEntity<>(map, HttpStatus.OK);
         }else{
             Map<String, String> map = new HashMap<String, String>();
